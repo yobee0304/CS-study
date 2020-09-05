@@ -76,14 +76,3 @@
 - 의존 관계를 맺을 때, 변화하기 쉬운 것 또는 자주 변화하는 것보다는 변화하기 어려운 것, 거의 변화가 없는 것에 의존해야한다
 
 ( 참고 : https://gmlwjd9405.github.io/2018/07/05/oop-solid.html )
-
-## 6. 가비지 컬렉션
-- 메모리상에 존재하지만, 변수가 가리키지 않는 값들을 정리하여 메모리 누수(memory leak)를 방지하는 방법
-~~~
-String url = “https://”     // But 변수 url은 “https”//www.naver.com”만을 가리킨다
-url += “www.naver.com”      // 메모리 스택에는 “https://”와 “https”//www.naver.com”이 존재
-                            // 결과적으로, “https://”는 사용하지 않으므로 메모리 누수가 발생!
-                            // 가비지 컬렉션을 통해 제거해 주어야 한다
-~~~
-
-(참고 : https://yaboong.github.io/java/2018/06/09/java-garbage-collection/ )
