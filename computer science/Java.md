@@ -84,3 +84,53 @@
 - 의존 관계를 맺을 때, 변화하기 쉬운 것 또는 자주 변화하는 것보다는 변화하기 어려운 것, 거의 변화가 없는 것에 의존해야한다
 
 ( 참고 : https://gmlwjd9405.github.io/2018/07/05/oop-solid.html )
+
+## 6. 객체지향 & 절차지향 프로그래밍
+* 절차지향 프로그래밍
+	* 실행하고자 하는 절차를 정하고, 이 절차대로 프로그래밍하는 방법
+	* 목적을 달성하기 위한 일의 흐름에 중점을 둔다.
+* 객체지향 프로그래밍
+	* 컴퓨터 프로그램을 객체들의 모임으로 파악하고자 하는 프로그래밍 방법
+	* 각 객체들은 서로 메시지를 주고 받을 수 있으며 데이터를 처리할 수 있다.
+	* 객체지향 프로그래밍의 장점
+		* 프로그램을 유연하고 변경이 용이하게 만든다.
+		* 프로그램의 개발과 보수를 간편하게 만든다.
+		* 직관적인 코드 분석을 가능하게 한다.
+		
+( 참고 : https://velog.io/@cyranocoding/%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8DOOP-Object-Oriented-Programming-%EA%B0%9C%EB%85%90-%EB%B0%8F-%ED%99%9C%EC%9A%A9-%EC%A0%95%EB%A6%AC-igjyooyc6c)
+
+## 7. OOP의 기본 구성 요소
+~~~~
+public class person{
+	private int age;
+	private String name;
+	private String home;
+	
+	... (생성자 생략)
+	
+	public void introduce(){
+		System.out.println("저는 " + Integer.toString(age) + "살 " + home + "에 사는 " + name + "입니다.");
+	}
+}
+
+... (메인 생략)
+
+person Charlie = new person(23, "김찰리", "서울시 마포구");
+Charlie.introduce();
+
+...
+~~~~
+
+1) 클래스(Class)
+* 같은 종류의 집단에 속하는 속성과 행위를 정의한 것. 
+* 다른 클래스와 독립적으로 디자인해야 한다.
+* 위에서는 사람들의 속성을 담고 있는 "person"이 클래스가 된다.
+2) 객체(Object)
+* 클래스의 인스턴스(Instance). 
+* 상위 클래스의 속성을 가지고 있으면서 개별적인 특성과 행위(메소드, Method) 또한 가지고 있다.
+* 위에서는 클래스 "person"에 개별적 특성을 부여받은 "Charlie"가 객체가 된다.
+3) 메서드(Method)
+* 클래스로부터 생성된 객체를 사용하는 방법.
+* 객체의 속성을 조작하는 데 사용된다.
+* 위에서는 객체 "Charlie"에서 부여받은 속성들을 활용해 자기소개를 출력하는 "introduce"가 메소드가 된다.
+	
