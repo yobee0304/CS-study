@@ -11,11 +11,11 @@
 		* 변수에 새로운 값을 선언할 때, 원래 값은 메모리에 유지된 채 새로운 값이 메모리에 생성되고 변수는 가리키기만 한다.
 		* 때문에 사용하지 않는 값이 메모리 스택에 존재하게 되고, 이를 메모리 누수(Memory Leak)라고 한다.
 		* 이런 사용하지 않는 값들을 메모리 스택에서 지워 메모리 누수를 방지하는 방법을 가비지 콜렉션(Garbage Collection)이라 한다.
-		~~~
+		```java
 		String url = “https://”     // But 변수 url은 “https”//www.naver.com”만을 가리킨다
 		url += “www.naver.com”      // 메모리 스택에는 “https://”와 “https”//www.naver.com”이 존재
 		                            // 결과적으로, “https://”는 사용하지 않으므로 메모리 누수가 발생!
-		~~~
+		```
 	(참고 : https://yaboong.github.io/java/2018/06/09/java-garbage-collection/ )
 - 단점
 1) 속도가 느리다
@@ -100,7 +100,7 @@
 ( 참고 : https://velog.io/@cyranocoding/%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8DOOP-Object-Oriented-Programming-%EA%B0%9C%EB%85%90-%EB%B0%8F-%ED%99%9C%EC%9A%A9-%EC%A0%95%EB%A6%AC-igjyooyc6c)
 
 ## 7. OOP의 기본 구성 요소
-~~~~
+```java
 public class person{
 	private int age;
 	private String name;
@@ -119,7 +119,7 @@ person Charlie = new person(23, "김찰리", "서울시 마포구");
 Charlie.introduce();
 
 ...
-~~~~
+```
 
 1) 클래스(Class)
 * 같은 종류의 집단에 속하는 속성과 행위를 정의한 것. 
@@ -134,3 +134,118 @@ Charlie.introduce();
 * 객체의 속성을 조작하는 데 사용된다.
 * 위에서는 객체 "Charlie"에서 부여받은 속성들을 활용해 자기소개를 출력하는 "introduce"가 메소드가 된다.
 	
+### 8. 오버로딩 & 오버라이딩
+* 오버로딩(Overloading)
+	* 메서드가 같은 이름을 가지고 있지만, 파라미터의 자료형이나 개수가 다른 경우
+	```java
+	public void introduce(int age){...}
+	public void introduce(String name){...}
+	public void introduce(int age, String name){...}
+	```
+* 오버라이딩(Overriding)
+	* 상위 클래스에 존재하는 메소드를 반환값, 이름, 파라미터 등을 동일하게 하여 재정의 하는 것
+	* 재정의하는 경우, 기능을 확장시킬 수 도 있다.
+	```java
+	public class cloth{
+		private String name;
+		public void introduce(){
+			System.out.println(name + "은 옷이야.");
+		}
+	}
+	
+	public class prada extends cloth{
+		@Override	// 개발자가 실수하지 않도록 @Override 어노테이션 사용을 권장
+		public void introduce(){
+			System.out.println(name + "은 아주 비싼 옷이야.");
+		}
+	}
+	```
+### 9. 추상 클래스 & 인터페이스
+* 추상 클래스(Abstract Class)
+	* 개념
+		* abstract 키워드로 선언된 클래스
+			* 클래스가 추상 메서드를 1개 이상 포함한다면, 반드시 추상 클래스로 선언해야 한다.
+			* 하지만, 클래스에 추상 메서드가 없는 경우도 추상 클래스로 선언 가능.
+			* 추상 매서드(Abstact Method)
+				* abstract 키워드와 함께 원형만 선언되고, 코드는 작성되지 않은 메서드
+				```java
+				public abstract int result();
+				public abstract int result(){
+					return 100;	// 추상 메서드지만, 코드가 작성되었기 때문에 오류 발생
+				}
+				```
+	* 선언
+		* 서브 클래스에서 슈퍼 클래스의 모든 추상 메서드를 오버라이딩하여 실행가능한 코드로 구현한다.
+	* 목적
+		* 객체를 생성하기 위한 클래스가 아닌, 상속을 위한 부모 클래스로 활용하는 것이 목적이다.
+		* 여러 클래스의 공통적인 부분을 추상화하여 자식 클래스에게 메서드 구현을 강제한다.
+		* 부모 클래스로부터 메서드에 대한 책임을 위임 받은 자식 클래스는 메서드의 기능을 구현 및 확장하는 것이 주요 목적이다.
+		
+		```java
+		/* 추상 클래스 */
+		public abstract class fruit{
+			private String name;
+			public abstract void printFruit();
+		}
+		```
+		```java
+		/* 자식 클래스 */
+		public class apple extends fruit{
+			/* 추상 메서드의 오버라이딩 */
+			public void printFruit(){
+				System.out.println("나는 " + this.name + "야!");
+			}
+		}
+		```
+* 인터페이스(Interface)
+	* 개념
+		* 추상 메서드와 상수만을 포함하며, interface 키워드로 선언한다.
+		* 모든 메서드는 추상 메서드로서, public abstract 속성이며 생략가능하다.
+		* 상수는 public static final 속성이며 생략가능하다.
+		* 다른 인터페이스를 상속받아 새로운 인터페이스를 만들 수 있다.
+		```java
+		interface avante extends car{...}
+		```
+	* 구현
+		* 인터페이스를 상속받고, 추상 메서드를 모두 구현한 클래스를 작성한다.
+		* implements 키워드를 사용하여 구현한다.
+	* 목적
+		* 상속받을 서브 클래스에게 구현할 메서드들의 원형을 모두 알려주어, 클래스가 자신의 목적에 맞게 메서드를 구현하도록 하는 것이다.
+		* 구현 객체의 같은 동작을 보장하기 위한 목적이 있다.
+	
+	```java
+	/* 인터페이스 개념 */
+	interface rentCar {
+		int Day = 10;		// = public static final int Day = 10;
+		void printCar();	// = public abstract void printCar();
+		void printDay();
+	}
+	```
+	
+	```java
+	/* 인터페이스 구현 */
+	class sonata implements rentCar {
+		// 인터페이스에서 선언된 추상 메서드를 모두 오바리이딩해주어야 한다.
+		public void printCar(){...}
+		public void printDay(){...}
+		// 새로운 메서드를 선언하여 기능을 확장할 수도 있다.
+		public void introduceCar(){...}
+	}
+	```
+	
+	* 추상 클래스와 인터페이스의 공통점 & 차이점
+		* 공통점
+		1. 객체를 생성할 수 없다.
+		2. 선언만 있고 구현 내용이 없다.
+		3. 자식 클래스에게 메서드의 구체적인 구현에 대한 책임을 위임한다.
+		* 차이점
+		
+		종류 | 추상 클래스 | 인터페이스
+		---- | ---- | ----
+		목적 | 상속을 위한 부모 클래스 | 구현 객체들의 같은 동작을 보장
+		클래스 | O | X
+		상속 | 단일 | 다중
+		예시 | “is a kind of” | “can do this”
+		
+		* "is a kind of" : Sports(Abstract Class) - Soccer, BasketBall...
+		* "can do this" : Runable(Interface) - Car, cheetah, man...
