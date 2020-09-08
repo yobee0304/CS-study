@@ -5,18 +5,18 @@ https://programmers.co.kr/learn/courses/30/lessons/60059
 * 완전 탐색
 ## 3. 풀이
 자물쇠를 중앙에 두고, 열쇠의 길이 m-1만큼의 두께로 둘러 쌓여있는 배열을 선언한다. 이는 열쇠의 일부만 자물쇠에 닿는 경우를 모두 탐색하기 위함이다.
-~~~~
+```python
 zero_padding = [[0 for i in range(nz)] for i in range(nz)]
     for i in range(n):
         for j in range(n):
             zero_padding[i+m-1][j+m-1] = lock[i][j]
-~~~~
+```
 
 열쇠를 사용해서 배열을 완전 탐색 할때, 열쇠가 회전한 4가지 경우에 대해서도 확인해 주어야한다.
 
 
 이때 4가지 경우의 열쇠를 구하는 함수를 하나 선언하여 사용하였다.
-~~~~
+```python
 def rotate(key):
     rotated_keys = []
 
@@ -32,7 +32,7 @@ def rotate(key):
         rotated_keys.append(key.copy())
 
     return rotated_keys
-~~~~
+```
 
 해당 열쇠가 자물쇠에 들어 맞는지를 확인하는 함수이다.
 
@@ -41,7 +41,7 @@ def rotate(key):
 이때, 중앙에 존재하는 원래 열쇠 범위만큼만 확인합니다.
 
 값이 1보다 커진다면 구멍이 없는데 들어가야하는 경우이기 때문에, 이 경우 또한 제외합니다.
-~~~~
+```python
 def check_open(lock, key, start_point):
     ans = True
 
@@ -64,7 +64,7 @@ def check_open(lock, key, start_point):
             break
 
     return ans
-~~~~
+```
 
 결과적으로, 총 4개의 경우의 수에 대해서 자물쇠가 열리는지를 "check_open" 함수로 확인하며 완전탐색합니다.
 
