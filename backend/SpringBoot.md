@@ -49,3 +49,15 @@
       * 조건에 따라 빈으로 등록하기도 하고 안하기도 함. (@ConditionalOn~~~)
       * @EnableAutoConfiguration을 사용하지 않더라도 실행은 가능하다. (단, 웹서버 관련 설정이 사라지기 때문에 웹서버로 동작하지는 않음)
       * 결과적으로 Configuration(자바 설정) 파일인 셈이다.
+  * 설정 파일 등록하는 법
+    1. @Configuration 파일 작성
+    2. src/main/resource/META-INF에 spring.factories 파일 만들기
+    3. spring.factories 안에 자동 설정 파일 추가
+    4. mvn install (다른 프로젝트에서도 사용할 수 있도록 로컬 메이븐 저장소에 저장)
+    
+* 빈의 재정의
+  * 1단계(@ComponentScan)에서 등록한 빈을 2단계(@EnableAutoConfiguration)에서 다시 등록하는 경우, 2단계에서 가져온 빈의 설정을 따른다
+  * 재정의 방지 방법
+    1. @ConditionalOnMissingBean : 2단계에서 덮어쓰는 것을 방지
+    2. @ConfigurationProperties("holoman") : application.properties에 있는 값으로 정의
+    3. @EnableConfiguration(HolomanProperties)
