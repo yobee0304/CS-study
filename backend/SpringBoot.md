@@ -61,3 +61,31 @@
     1. @ConditionalOnMissingBean : 2단계에서 덮어쓰는 것을 방지
     2. @ConfigurationProperties("holoman") : application.properties에 있는 값으로 정의
     3. @EnableConfiguration(HolomanProperties)
+    
+* 내장 웹 서버
+  * 스프링 부트 자체는 웹 서버가 아니다!
+  * 웹 서버의 실행 과정
+    * 톰캣 객체 생성 - 포트 설정 - 톰캣에 컨텍스트 추가 - 서블릿 만들기 - 톰캣에 서블릿 추가 - 컨텍스트에 서블릿 매핑 - 톰캣 실행 및 대기
+    * 이 모든 과정을 보다 상세하고 유연하게 실행해 주는게 바로 스프링 부트의 자동설정이다. (AutoConfiguration)
+    * ServletWebServerFactoryAutoConfiguration : 서블릿 웹 서버 생성
+    * DispatcherServletAutoConfiguration : 서블릿을 만들고 서블릿 컨테이너에 등록
+      * AutoConfiguration이 둘로 분리 되어있는 이유는? : 서블릿 컨테이너는 설정(pom.xml)에 따라 변할 수 있지만, 서블릿은 변하지 않기 때문이다.
+  * 컨테이너와 포트
+    * 컨테이너
+      * 스프링 부트의 자동설정으로 인해 기본 컨테이너는 '톰캣(Tomcat)'
+      * 톰캣이 아닌 다른 컨테이너를 사용하고 싶다면?
+        * <exclusions> 섹션을 사용해서 톰캣 의존성을 제외하고 새로운 의존성 추가
+        ```xml
+        <exclusions>
+            <exclusion>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-tomcat</artifactId>
+            </exclusion>
+        </exclusions>
+        ```
+     * 포트
+       * application.properties 설정으로 웹서버 제어 가능
+         * spring.main.web-application-type=none (웹서버 사용하지 않기)
+         * server.port=7070
+         * server.port=0 (랜덤으로 사용할 수 있는 포트는 사용)
+       
