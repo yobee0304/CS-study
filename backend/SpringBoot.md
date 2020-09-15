@@ -85,7 +85,14 @@
         ```
      * 포트
        * application.properties 설정으로 웹서버 제어 가능
-         * spring.main.web-application-type=none (웹서버 사용하지 않기)
-         * server.port=7070
-         * server.port=0 (랜덤으로 사용할 수 있는 포트는 사용)
+         ```xml
+         # 웹서버 사용하지 않기
+         spring.main.web-application-type=none
+
+         # 웹서버 포트를 7070으로 변경
+         server.port=7070
+
+         # 웹서버 포트를 사용할 수 있는 랜덤 포트로 변경
+         server.port=0
+         ```
        
