@@ -85,7 +85,7 @@
         ```
      * 포트
        * application.properties 설정으로 웹서버 제어 가능
-         ```xml
+         ```
          # 웹서버 사용하지 않기
          spring.main.web-application-type=none
 
@@ -95,4 +95,28 @@
          # 웹서버 포트를 사용할 수 있는 랜덤 포트로 변경
          server.port=0
          ```
-       
+  * HTTPS와 HTTP2
+    * HTTPS 설정하기
+      * keytool -genkey : 키스토어 만들기
+      ```
+      # application.properties
+      server.ssl.key-store: keystore.p12
+      server.ssl.key-store-password: 123456
+      server.ssl.keyStoreType: PKCS12
+      server.ssl.keyAlias: spring
+      ```
+      * 커넥터는 하나이기 때문에, https 설정 후에는 http를 동시에 사용할 수 없다.
+    * HTTP2 설정하기
+      ```
+      # application.properties
+      server.http2.enabled=true
+      ```
+  * JAR 파일
+    * mvn package를 하면 실행 가능한 JAR 파일 하나가 생성된다.
+    * spring-maven-plugin이 해주는 일 : "패키징"
+    * JAR 파일 하나에 필요한 라이브러리 JAR파일들이 모두 들어있다.
+    * 기본적으로 자바는 JAR파일 안에 있는 JAR 파일들을 로딩하는 표준적인 방법이 없다.
+      * 스프링 부트의 전략 = JAR파일 하나로 앱을 실행시키는 전략
+        * 애플리케이션 클래스와 라이브러리 위치 구분
+        * org.springframework.boot.loader.jar.JarFile을 사용해서 내장 JAR를 읽는다. 
+        * org.springframework.boot.loader.Launcher를 사용해서 실행한다.
