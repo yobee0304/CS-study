@@ -1,8 +1,6 @@
 # SpringBoot
 
-## 0. SpringBoot
-
-### 0-1. 구조
+## 1. 구조
 * 스프링 부트의 프로젝트 구조는 메이븐 기본 프로젝트 구조와 일치하다.
   * 소스 코드
   * 소스 리소스
@@ -13,7 +11,7 @@
   * @SpringBootApplication은 @ComponentScan을 포함한다.
   * 또한, @ComponenteScan은 현재 패키지를 기준으로 모든 하위 패키지를 탐색 범위로 잡고 빈으로 등록하기 때문이다.
 
-### 0-2. 원리
+## 2. 원리
 * <parent> 섹션으로 등록한 상위 dependency에서 의존성을 관리하기 때문에, 사용자가 직접 관리할 부분을 줄여준다. (ex. 의존성 버전)
   ```xml
   <!-- pom.xml -->
@@ -120,3 +118,53 @@
         * 애플리케이션 클래스와 라이브러리 위치 구분
         * org.springframework.boot.loader.jar.JarFile을 사용해서 내장 JAR를 읽는다. 
         * org.springframework.boot.loader.Launcher를 사용해서 실행한다.
+
+## 3. 활용
+* SpringApplication
+  * 기본 로그 : INFO 레벨
+  ```
+  2020-09-17 17:50:06.865  INFO 38673 --- [  restartedMain] ...
+  ```
+  * FailureAnalyzer : 에러가 났을때, 에러 메시지를 커스터마이징할 수 있다.
+  * Banner
+  ```
+  # 기본 배너
+    .   ____          _            __ _ _
+   /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+   \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+    '  |____| .__|_| |_|_| |_\__, | / / / /
+   =========|_|==============|___/=/_/_/_/
+   :: Spring Boot ::        (v2.3.2.RELEASE)
+  ```
+    * banner.txt | gif | jpg | png 파일로 새로운 배너 설정 가능
+    * ${spring-boot.version(스프링 부트의 버전)}등의 변수를 사용할 수 있다.
+    * Banner 클래스를 구현하고 SpringApplication.setBanner()로 설정 가능하다.
+    * 배너 끄는 방법
+    ```
+    app.setBannerMode(Banner.Mode.off);
+    ```
+  * SpringApplicationBuilder로 빌더 패턴 사용 가능
+  ```Java
+  new SpringApplicationBuilder()
+          .main(SpringinitApplication.class)
+          .run(args);
+  ```
+  * 리스너를 빈으로 등록했더 하더라도, 특정 이벤트가 빈이 등록되기 이전에 발생한다면 실행되지 않는다.
+    * 따로 직접 등록 해줘야한다. 
+    ```java
+    SpringApplication.addListners();
+    ```
+  * WebApplicationType 설정
+    * SERVLET (Spring MVC)
+    * REACTIVE (Spring WebFlux)
+    * NONE (둘 다 없으면)
+    * MVC, WebFlux 둘 다 있으면 "SERVLET"으로 작동 : servlet이 있는지 없는지를 먼저 확인하기 때문에
+  ```java
+  SpringApplication.setWebApplicationType();
+  ```
+  * 애플리케이션 아규먼트 사용하기
+    * ApplicationArgument를 빈으로 등록해주기 때문에 가져다 쓰면 된다.
+  * 애플리케이션 실행한 뒤 실행하고자 할 때
+    * ApplicationRunner
+    * @Order : 순서 지정 가능
