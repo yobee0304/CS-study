@@ -69,3 +69,56 @@
   ```
   
   (참고 : https://mygumi.tistory.com/139)
+  
+## 6. REST
+  * 정의
+    * Representational State Transfer의 약자
+    * HTTP URI를 통해 자원(Resource)을 명시하고, HTTP Method를 통해 자원에 대한 CRUD Operation을 적용하는 것을 의미한다.
+  * 장점
+    * HTTP 프로토콜의 인프라를 그대로 사용하기 때문에 REST API를 활용하기 위한 별도의 인프라가 필요 없다.
+    * HTTP 표준 프로토콜을 따르는 모든 플랫폼에서 이용 가능하르모, 범용성이 좋다.
+    * 서버와 클라이언트의 역할을 명확하게 분리할 수 있다.
+  * 단점
+    * HTTP Method의 형태가 제한적이기 때문에 사용할 수 있는 메소드가 4가지밖에 없다.
+    * 구형 브라우저가 지원하지 못하는 부분이 존재한다.(PUT, DELETE)
+  * REST가 필요한 이유
+    * 최근의 서버 프로그램은 웹뿐만 아니라 안드로이드, IOS 같은 모바일 디바이스와도 통신이 가능해야한다.
+  * REST의 구성 요소
+    1. 자원(Resource) : URI
+      * 모든 자원에는 고유의 ID가 존재하고, 자원은 서버에 존재한다.
+      * 여기서 고유 ID 역할은 URI가 담당한다.
+      * 클라이언트는 URI를 통해 자원을 지정하고, 해당 자원에 대한 조작을 서버에게 요청한다.
+    2. 행위(Verb) : HTTP Method
+      * HTTP Method는 GET, POST, PUT, DELETE 메소드를 제공한다.
+    3. 표현(Representation of Resource)
+      * 클라이언트가 자원에 대한 조작을 요청하면, 서버는 이에 적절한 응답을 제공한다.
+      * 응답은 주로 JSON, XML로 데이터를 주고 받는 것이 일반적이다.
+  * RESTful이란?
+    * REST를 REST하게 쓰는 방법
+    * REST원리를 따르는 시스템은 RESTful하다고 할 수 있다.
+    * RESTful하지 못한 경우
+      * CRUD를 한 Method만으로 구현한 경우
+      * route에 resource,id 외의 정보가 들어가는 
+    
+(참고 : https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html)
+
+## 7. HTTP Method
+1. GET
+* URI가 가진 정보를 검색하기 위해 서버에 검색을 요청하는 메서드
+
+2. POST
+* 요청 URI에 폼 입력을 처리하기 위해 구성한 서버 측 스크립트 혹은 CGI 프로그램으로 구성되고 Form Action과 함께 전송된다.
+* 이 때, 헤더 정보에 포함되지 않고 데이터 부분에 요청 정보가 들어있다.
+
+3. PUT
+* POST와 유사한 구조
+* 헤더 이외의 메시지가 함께 전송된다.
+
+4. DELETE
+* 웹서버의 파일을 삭제하기 위한 메서드 (PUT과 반대 개념)
+
+5. HEAD
+* GET과 유사한 방식
+* 서버에서는 헤더 정보 이외에는 어떤 정보도 보내지 않는다.
+
+(참고 : https://gyrfalcon.tistory.com/entry/HTTP-응답-코드-종류-HTTP-메소드-종류)
