@@ -74,6 +74,8 @@
 4. Durability(영속성)
 * 한 번 적용된 트랜젝션은 영원히 적용되는 특성
 
+( 참고 : https://medium.com/@chrisjune_13837/db-transaction-%EA%B3%BC-acid%EB%9E%80-45a785403f9e )
+
 ## 4.인덱스(Index)
 * 테이블에 대한 동작 속도를 높여주는 자료 구조
 * MySQL을 첫 번째 열부터 전체 테이블에 걸쳐 연관된 열을 모두 확인하므로, 테이블의 크기가 커질수록 비용이 크게 증가한다.
