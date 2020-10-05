@@ -9,10 +9,10 @@
 * @SpringBootApplication이 붙은 클래스를 '메인 애플리케이션'이라고 한다.
   * 사용하고 있는 패키지 중, 최상위 패키지에 메인 애플리케이션을 위치시켜야 한다.
   * @SpringBootApplication은 @ComponentScan을 포함한다.
-  * 또한, @ComponenteScan은 현재 패키지를 기준으로 모든 하위 패키지를 탐색 범위로 잡고 빈으로 등록하기 때문이다.
+    * @ComponenteScan은 현재 패키지를 기준으로 모든 하위 패키지를 탐색 범위로 잡고 빈으로 등록하기 때문이다.
 
 ## 2. 원리
-* <parent> 섹션으로 등록한 상위 dependency에서 의존성을 관리하기 때문에, 사용자가 직접 관리할 부분을 줄여준다. (ex. 의존성 버전)
+* <parent> 섹션으로 등록한 상위 dependency에서 의존성을 관리하기 때문에, 사용자가 직접 관리할 부분(ex. 의존성 버전)을 줄여준다. 
   ```xml
   <!-- pom.xml -->
   <parent>
