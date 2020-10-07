@@ -168,3 +168,73 @@
   * 애플리케이션 실행한 뒤 실행하고자 할 때
     * ApplicationRunner
     * @Order : 순서 지정 가능
+    
+### 외부 설정
+* 사용할 수 있는 외부 설정
+  * properties : key-value 형대로 값을 정의하면 참조해서 사용 가능
+    * test 디렉터리에 resources 디렉터리를 생성해서 Test Resources로 지정한 다음, 또 다른 application.properties를 생성하면 테스트용 properties를 사용할 수 있다.
+    * 기존의 properties를 테스트용 properties가 오버라이딩 되기 때문에, 기존 properties에 있는 value가 테스트 properties에 없다면 오류가 난다.
+  ```
+  @Value("${key}")
+  private String value;
+  ```
+  * YAML
+  * 환경 변수
+  * 커맨드 라인 아규먼트
+  
+* 프로퍼티 우선 순위
+1. 유저 홈 디렉토리에 있는 spring-boot-dev-tools.properties
+2. 테스트에 있는 @TestPropertySource
+3. @SpringBootTest 에노테이션의 properties 애트리뷰트
+4. 커맨드 라인 아규먼트
+5. SPRING_APPLICATION_JSON (환경 변수 또는 시스템 프로티)에 들어있는 프로퍼티
+6. ServletConfig 파라미터
+7. ServletContext 파라미터
+8. java:comp/env JNDI 애트리뷰트
+9. System.getProperties() 자바 시스템 프로퍼티
+10. OS 환경 변수
+11. RandomValuePropertySource
+12. JAR 밖에 있는 특정 프로파일용 application properties
+13. JAR 안에 있는 특정 프로파일용 application properties
+14. JAR 밖에 있는 application properties
+15. JAR 안에 있는 application properties
+16. @PropertySource
+17. 기본 프로퍼티 (SpringApplication.setDefaultProperties)
+
+* application.properties 우선 순위 (겹치는게 있으면 높은게 낮은 것을 오버라이딩 한다)
+1. file:./config/
+2. file:./
+3. classpath:/config/
+4. classpath:/
+
+* 랜덤값 설정하기 : ${random.'Type'}, Type = int, float, ...
+* 플레이스 홀더
+  * name = gildong
+  * fullName = ${name} hong
+
+* 타임-세이프 프로퍼티 : @ConfigurationProperties
+  * 여러 프로퍼티를 묶어서 읽어올 수 있다.
+  * 빈으로 등록해서 다른 빈에 주입할 수 있다.
+    * @EnableConfigurationProperties
+    * @Component
+    * @Bean
+    
+* 융통성 있는 바인딩(Relaxed Binding)
+  * context-path(케밥)
+  * context_path(언드스코어)
+  * contextPath(캐멀)
+  * CONTEXTPATH
+    * 융통성 있게 모두 같은 걸로 취급하여 매핑한다.
+    
+* 프로퍼티 타입 컨버전
+  * 스프링 부트에서 자체적으로 프로퍼티를 알맞은 타입으로 컨버젼
+  * @DurationUnit
+    * s, m, d 같이 시간을 나타내는 sufix만 프로퍼티에 잘 붙이면 어노테이션을 사용하지 않아도 컨버젼 된다.
+
+* 프로퍼티 값 검증
+  * @Validated
+  * JSR-303(@NotNull, @Size, ...)
+  
+* @Value
+  * SpEL(Spring Expression Language) 사용 가능
+  * @DurationUnit, @Validated는 사용 불가
