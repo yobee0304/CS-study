@@ -238,3 +238,23 @@
 * @Value
   * SpEL(Spring Expression Language) 사용 가능
   * @DurationUnit, @Validated는 사용 불가
+
+* 프로파일(Profile)
+  * 선언 : @Profile({profile_name})
+  * 프로파일 활성화 : spring.profile.active={profile_name}
+  * 프로파일 추가 : spring.profile.inclue={profile_name}
+  * 프로파일용 프로퍼티 : spring-{profile_name}.properties
+  
+* 로깅
+  * --debug(일부 핵심 라이브러리만 디버깅 모드로)
+  * --trace(정부 다 디버깅으로)
+  * 컬러 출력: spring.output.ansi.enabled
+  * 파일 출력: logging.file / logging.path
+  * 로그 레벨 조정: logging.level.패키지 = 로그 레벨(특정 패키지마다 로그 레벨 설정 가능)
+
+* 커스텀 로그 설정 파일 사용하기
+  * Logback: logback-spring.xml(추천)
+    * Logback extension (추가 기능 제공)
+      * 프로파일 <springProfile name="프로파일">
+      * Environment 프로퍼티 <pringProperty>
+  * Log4J2: log4j2-spring.xml
