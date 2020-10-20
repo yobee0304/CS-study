@@ -62,6 +62,39 @@
 - 자식 클래스를 외부로부터 은닉하는 캡슐화의 일종
 4) 다형성
 - 서로 다른 클래스의 객체가 같은 메시지를 받았을 때 각자의 방식으로 동작하는 능력
+- 다형성과 일반화 관계는 코드를 간결하게 할 뿐 아니라 변화에도 유연하게 대처할 수 있게 한다.
+```java
+public abstract class Person{
+	public void introduce_yourself();
+}
+
+public class Charlie extends Person{
+	public void introduce_yourself(){
+		System.out.println("나는 Charlie라고 해!");
+	}
+}
+
+public class Lisa extends Person{
+	public void introduce_yourself(){
+		System.out.println("나는 Mina라고 해~");
+	}
+}
+
+public class Main {
+	public static void main(String[] args) {
+		Person charlie = new Charlie();
+		Person mina = new Mina();
+		
+		charlie.introduce_yourself();
+		mina.introduce_yourself();
+		
+		// 출력 화면
+		// 나는 Charlie라고 해!
+		// 나는 Mina라고 해~
+  	}
+}
+```
+- 단, 부모 클래스의 참조 변수가 접근할 수 있는 것은 부모 클래스가 물려준 변수와 메서드뿐이다.
 
 (참고 : https://gmlwjd9405.github.io/2018/07/05/oop-features.html )
 
@@ -70,7 +103,7 @@
 - 객체는 단 하나의 책임을 가져야 한다 
 - 변경 사유가 될만한 것도 하나가 되기 때문에, 응집도를 높일 수 있다
 2) O(개반-폐쇄 원칙 OCP, Open Closed Priciple)
-- 기존의 코드를 	변경하지 않으면서 추가할 수 있도록 설계되어야 한다
+- 기존의 코드를 변경하지 않으면서 기능을 추가할 수 있도록 설계되어야 한다
 - 변해야 하는 것은 쉽게 변하게 해야 하고, 변하지 말아야 하는 것은 영향을 받지 않게 해야 한다.
 3) L(리스코프 치환 원칙 LSP, Liskov Substitution Principle)
 - 일반화 관계에 대한 이야기며, 자식 클래스는 최소한 자신의 부모 클래스에서 가능한 행위는 수행할 수 있어야 한다
