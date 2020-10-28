@@ -258,3 +258,35 @@
       * 프로파일 <springProfile name="프로파일">
       * Environment 프로퍼티 <pringProperty>
   * Log4J2: log4j2-spring.xml
+
+### 테스트
+- spring-boot-starter-test(test 범위로)를 추가
+```
+<scope>test</scope>
+```
+- @SpringBootTest
+  - @RunWith(SpringRunner.class)와 같이 사용해야 한다.
+  - 빈 설정 파일은 자동으로 찾는다.(@SpringBootApplication)
+- webEnvironment
+  - @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.{...})
+  - MOCK: mock servlet environment. 내장 톰캣 X
+    - @AutoConfigureMockMvc 붙이고 MockMvc 빈을 주입 받아서 사용
+  - RANDON_PORT, DEFINED_PORT: 내장 톰캣 O
+  - NONE: 서블릿 환경 제공 X
+- @MockBean
+  - ApplicationContext에 들어있는 빈을 Mock으로 만든 객체로 교체한다.
+  - Controller를 원본이 아닌 복사본을 사용하게 된다.
+- 슬라이스 테스트
+  - @SpringBootTest는 큰 범위의 통합 테스트
+  - 통합 테스트를 하지 않고, 레이어 별로 잘라서 테스트하고 싶을 때?
+    - @JsonTest, @WebMvcTest, @WebFluxTest, @DataJpaTest
+- OutputCaptureRule : 로그를 비롯한 콘솔에 출력되는 모든 사항을 캡쳐
+
+- Spring-Boot-Devtools
+  - 의존성으로 추가하여 사용 가능
+  - 캐시 설정을 개발 환경에 맞게 변경
+  - 클래스패스에 있는 파일이 변경 될 때마다 자동으로 restart
+    - 직접 restart하는 것보다 빠르다.
+  - 라이브 릴로드 : 리스타트 했을 때 브라우저를 자동으로 refresh하는 기능
+  - 글로벌 설정
+    - ~/.spring-boot-devtools.properties : 1순위 외부설정 파일
