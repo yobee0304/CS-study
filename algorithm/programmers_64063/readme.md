@@ -1,11 +1,13 @@
-# 1. 문제
+# 호텔 방 배정
+
+## 1. 문제
 https://programmers.co.kr/learn/courses/30/lessons/64063
 
-# 2. 유형
+## 2. 유형
 - Recursive Function
 - Union-Find
 
-# 3. 풀이
+## 3. 풀이
 * <Key, Value> 값이 <방 번호, 다음 방 번호> 인 dictation을 선언한다
 * 입력 받은 방 번호에 의해서 차례대로 방을 채운다.
 * 만약 해당 방이 이미 차있는 경우, 이후에 가장 가까운 빈 방을 찾아야 하므로 빈 방을 찾아주는 함수 선언
@@ -28,7 +30,7 @@ def find_empty_room(hotel, room_number):
     return target_room_number
 ```
 
-# 4. 후기
+## 4. 후기
 유니온 파인드를 통해 빈 방을 최대한 빠르게 찾아주는 것이 관건인 문제였다.
 
 문제를 풀면서 직면한 문제들은 다음과 같다.
