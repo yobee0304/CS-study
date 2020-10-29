@@ -1,11 +1,13 @@
-# 1. 문제
+# 불량 사용자
+
+## 1. 문제
 https://programmers.co.kr/learn/courses/30/lessons/64064
 
-# 2. 유형
+## 2. 유형
 * 완전 탐색
 * DFS
 
-# 3. 풀이
+## 3. 풀이
 * 우선 주어진 각각의 banned_id 마다 가능한 user_id들을 구하는 작업을 했다.
   * ex) "fr**d" -> "fraid", "fruid"
 ```python
@@ -71,7 +73,7 @@ def dfs(candidate, cnt, id, answer):
         dfs(candidate, cnt+1, tmp.copy(), answer)
 ```
 
-# 4. 후기
+## 4. 후기
 각각의 불량 사용자 아이디마다 가능한 사용자 아이디를 구하는 것만해도 3중 for문이 사용되었다.
 
 또한 DFS를 통해 모든 경우의 수를 확인하는 것 또한 많은 시간을 필요로 하기 때문에 처음에 걱정이 되었다.
