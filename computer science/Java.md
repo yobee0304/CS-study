@@ -1,5 +1,5 @@
 # Java
-## 1. 자바의 장단점
+### 1. 자바의 장단점
 - 장점
 1) JVM에서 독자적으로 동작하기 때문에, 운영체제로부터 독립적이다.
 2) 객체지향 언어이다.
@@ -23,13 +23,13 @@
 2) 예외처리가 불편하다
 	* 프로그래머 검사가 필요한 예외가 등장한다면 무조건 프로그래머가 선언해줘야 한다.
 
-## 2. 자바 접근 제어자 종류
+### 2. 자바 접근 제어자 종류
 - public  + : 어떤 클래스의 객체에서도 접근 가능
 - private  - : 이 클래스에서 생성된 객체들만 접근 가능
 - protected  # : 이 클래스와 동일 패키지에 있거나 상속 관계에 있는 하위 클래스의 객체들만 접근 가능
 - package  ~ : 동일 패키지에 있는 클래스의 객체들만 접근 가능
 
-## 3. 자바의 데이터 타입
+### 3. 자바의 데이터 타입
 1) 기본형 데이터 타입
 - 정수형(byte, short, int, long)
 - 실수형(float, double)
@@ -43,7 +43,7 @@
 - 더 이상 참조하는 변수가 없을 때 가비지 컬렉션에 의해 파괴된다.
 - 참조 타입은 값이 저장된 곳의 주소를 저장하는 공간으로 객체의 주소를 저장한다. (Call-By-Value)
 
-## 4. OOP의 4가지 특징
+### 4. OOP의 4가지 특징
 1) 추상화
 - 구체적인 사물들의 공통적인 특징을 파악해서 이를 하나의 개념(집합)으로 다루는 것
 - 추상적인 메소드를 활용하면, 변수의 값이 변하더라도 코드를 변경할 필요가 없다.
@@ -98,7 +98,7 @@ public class Main {
 
 (참고 : https://gmlwjd9405.github.io/2018/07/05/oop-features.html )
 
-## 5. OOP의 5대 원칙 (SOLID)
+### 5. OOP의 5대 원칙 (SOLID)
 1) S(단일 책임 원칙 SRP, Single Responsibility Principle)
 - 객체는 단 하나의 책임을 가져야 한다 
 - 변경 사유가 될만한 것도 하나가 되기 때문에, 응집도를 높일 수 있다
@@ -118,7 +118,7 @@ public class Main {
 
 ( 참고 : https://gmlwjd9405.github.io/2018/07/05/oop-solid.html )
 
-## 6. 객체지향 & 절차지향 프로그래밍
+### 6. 객체지향 & 절차지향 프로그래밍
 * 절차지향 프로그래밍
 	* 실행하고자 하는 절차를 정하고, 이 절차대로 프로그래밍하는 방법
 	* 목적을 달성하기 위한 일의 흐름에 중점을 둔다.
@@ -132,7 +132,7 @@ public class Main {
 		
 ( 참고 : https://velog.io/@cyranocoding/%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8DOOP-Object-Oriented-Programming-%EA%B0%9C%EB%85%90-%EB%B0%8F-%ED%99%9C%EC%9A%A9-%EC%A0%95%EB%A6%AC-igjyooyc6c)
 
-## 7. OOP의 기본 구성 요소
+### 7. OOP의 기본 구성 요소
 ```java
 public class person{
 	private int age;
@@ -282,3 +282,14 @@ Charlie.introduce();
 		
 		* "is a kind of" : Sports(Abstract Class) - Soccer, BasketBall...
 		* "can do this" : Runable(Interface) - Car, cheetah, man...
+		
+### 10. Unit Test
+* 유닛 테스트(Unit Test)란?
+	* 메서드를 테스트하기 위한 또 다른 메서드
+	* 하나의 유닛 테스트는 하나의 메서드의 특정 루틴을 검사한다.
+	* 프로그램 전체를 실행하지 않고 메서드를 테스트할 수 있다.
+* Why Unit Test?
+	* 프로그램이 크고 메모리를 많이 사용하는 프로그램의 메서드를 로컬 환경에서 쉽게 테스트 해보기 위해 사용한다.
+	* 의존성이 있는 다른 클래스들에서 버그가 나는 것을 방지하기 위해서이다.
+
+(참고 : https://imasoftwareengineer.tistory.com/88)
