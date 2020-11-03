@@ -290,3 +290,69 @@
   - 라이브 릴로드 : 리스타트 했을 때 브라우저를 자동으로 refresh하는 기능
   - 글로벌 설정
     - ~/.spring-boot-devtools.properties : 1순위 외부설정 파일
+
+## 4. Spring MVC
+### 소개
+* 스프링 MVC는 AutoConfiguration에 의해서 자동 설정되므로, 별다른 설정 없이 사용 가능하다.
+* 스프링 MVC 기능 확장 : @Configuration + WebMvcConfigurer
+* 스프링 MVC 기능 재정의 : @Configuration + @EnableWebMvc
+  * 재정의할 경우, 스프링 부트에서 자동으로 제공하는 설정이 모두 리셋 되어 일일히 추가해줘야 하기 때문에 추천하지 않는다!
+
+### HttpMessageConverters
+* HTTP 요청 본문을 객체로 변경하거나, 객체를 HTTP 응답 본문으로 변경할 때 사용한다. (@RequestBody, @ResponseBody)
+* Default는 Json타입
+* 클래스에 @RestConroller 어노테이션이 붙어있따면, @ResponseBody 생략 가능
+```Java
+@PostMapping("/user")
+public @ResponseBody User create(@RequestBody User user){
+    return null;
+}
+
+// @ResponseBody가 생략된 핸들러
+@PostMapping("/user")
+public User create(@RequestBody User user){
+    return null;
+}
+```
+
+### ViewResolve
+* 들어오는 Accept Header에 알맞는 응답을 제공하는 기능.
+  * Accept Header : 어떠한 형식의 응답을 원하는지 서버 사이드에 제공하는 정보
+  
+### 정적 리소스
+* 서버 사이드로 요청이 들어왔을 때, 새로운 뷰를 생성하지 않고 해당하는 리소스가 이미 만들어져 있는 리소스.
+* 기본 리소스 위치
+  * classpath:/static
+  * classpath:/public
+  * classpath:/resources/
+  * classpath:/META-INF/resources
+  * spring.mvc.static-path-pattern : 맵핑 설정 변경 가능
+  * spring.mvc.static-locations : 리소스 찾을 위치 변경 가능
+* Last-Modified 헤더를 통해 304 응답을 보낸다.
+  * 변경 사항이 없으면 캐시에 있는 데이터를 사용하기 때문에 속도가 더 빠르다.
+  * 변경 사항이 있으면 200 응답을 보낸다.
+* ResourceHttpRequestHandler가 처리한다.
+  * WebMvcConfigurer의 addResourceHandlers로 커스터마이징 할 수 있다.
+```Java
+// path의 마지막이 "/"로 끝나야 맵핑이 잘 된다.
+@Override
+public void addResourceHandlers(ResourceHandlerRegistry registry){
+    registry.addResourceHandler("/m/**")
+         .addResourceLocations("classpath:/m/")
+         .setCachePeriod(20);
+}
+```
+
+### 웹JAR
+* 스크립트 라이브러리(JQuery, Bootstrap)를 웹JAR파일을 통해 추가 가능
+* 웹JAR 맵핑 : "/webjars/**"
+* webjars-locator-core 의존성 : 웹JAR 버전 생략 가능
+
+### index 페이지 & 파비콘
+* 웰컴페이지
+  * 루트로 접근했을 때 확인할 수 있는 페이지
+  * index.html -> index.템플릿 순으로 확인하고, 존재하면 웰컴페이지로 사용
+  * 둘 다 없으면 에러 발생
+* 파비콘
+  * favicon.ico
+  * 페이지 탭에 표시되는 작은 아이콘
