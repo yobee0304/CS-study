@@ -356,3 +356,74 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
 * 파비콘
   * favicon.ico
   * 페이지 탭에 표시되는 작은 아이콘
+
+### 템플릿 엔진
+* 스프링 부트가 자동 설정을 지원하는 템플릿 엔진
+  * Thymeleaf
+  * FreeMarker
+  * Groovy
+  * Mustache
+* JSP는 권장하지 않는 이유
+  * JAR 패키징 할 때는 동작하지 않고, WAR 패키징을 따로 해야한다
+  * Undertow 서블릿 엔진의 경우, JSP를 지원하지 않음
+* Thymeleaf
+  * 템플릿 엔진이 있더라도, 서블릿 엔진에 의해서 최종적인 템플릿이 완성된다.
+  * Thymeleaf는 서블릿 엔진에 독립적으로 동작하는 템플릿 엔진이다.
+  
+### HtmlUnit
+* HtmlUnit : HTML의 단위테스트를 위한 툴
+* WebClient를 주입받아 단위테스트에 사용한다.
+```xml
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>htmlunit-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit</artifactId>
+            <scope>test</scope>
+        </dependency>
+```
+
+### ExceptionHandler
+* 스프링 MVC 예외 처리 방법
+  * @ControllerAdvice
+  * @ExchangepHandler
+* BasicErrorHandler
+  * 스프링 부트가 제공하는 기본 예외 처리기
+  * HTML, JSON 응답을 지원한다.
+* 커스텀 에러 페이지 : 상태 코드 값에 따라 다른 에러 페이지를 보여준다.
+  * 404.html : 상태 코드가 404일때의 에러 페이지
+  * 5xx.html : 상태 코드가 500대일때의 에러 페이지
+  * ErrorViewResolver 구현
+  
+### Spring HATEOAS
+* **H**ypermedia **A**s **T**he **E**ngine **O**f **A**pplication **S**tate
+* 서버: 현재 리소스와 연관된 링크 정보를 클라이언트에게 제공한다.
+* 클라이언트: 연관된 링크 정보를 바탕으로 리소스에 접근한다.
+* 연관된 링크 정보
+  * Relation
+  * **H**ypertext **Ref**erence
+* spring-boot-starter-hateoas 의존성을 추가하여 사용 가능하다.
+* ObjectMapper 제공
+  * 객체를 json으로 변환하거나, json을 객체로 변환하기 위해 필요한 맵퍼
+  * 커스터마이징
+    * spring.jackson.*
+    * Jackson2ObjectMapperBuilder
+
+### CORS
+* SOP(Single-Origin Policy)
+  * 같은 오리진에만 요청을 보낼 수 있다는 규칙
+  * 기본적으로 적용되어 있는 규칙
+* CORS(Cross-Origin Resource Sharing)
+  * 서로 다른 오리진끼리 리소스를 공유할 수 있다
+  * SOP를 우회하기 위한 기법
+* Origin이란?
+  * URI 스키마 (http, https)
+  * hostname (whiteship.me, localhost)
+  * 포트 (8080, 18080)
+  * 스키마, hostname, 포트가 조합되어 하나의 오리진이 된다.
+* 스프링 MVC @CrossOrigin
+  * @Controller나 @RequestMapping에 추가
+  8 WebMvcConfigurer 사용해서 글로벌 설정
