@@ -427,3 +427,99 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
 * 스프링 MVC @CrossOrigin
   * @Controller나 @RequestMapping에 추가
   8 WebMvcConfigurer 사용해서 글로벌 설정
+
+
+## 5. Spring Data
+### 인메모리 데이터베이스
+* 지원하는 인메모리 데이터베이스  
+  * H2 (추천)
+  * HSQL
+  * Derby
+* Spring-JDBC가 클래스패스에 있으면 자동 설정이 필요한 빈을 설정해 준다.
+  * DataSource
+  * JdbcTemplate
+* 인-메모리 데이터베이스 기본 연결 정보 확인하는 방법
+  * URL: “testdb”
+  * username: “sa”
+  * password: “”
+* H2 콘솔 사용하는 방법
+  * spring-boot-devtools 추가
+  * spring.h2.console.enabled=true 추가.
+  * /h2-console로 접속 (이 path도 바꿀 수 있음)
+  
+### MySQL
+* 지원하는 DBCP
+  * HikariCP (기본)
+  * Tomcat CP
+  * Commons DBCP2
+* DBCP 설정
+  * spring.datasource.hikari.*
+  * spring.datasource.tomcat.*
+  * spring.datasource.dbcp2.*
+* MySQL 커넥터 의존성 추가
+```
+<dependency>
+   <groupId>mysql</groupId>
+   <artifactId>mysql-connector-java</artifactId>
+</dependency>
+```
+* MySQL 추가 (도커 사용)
+  * docker run -p 3306:3306 --name mysql_boot -e MYSQL_ROOT_PASSWORD=1 -e MYSQL_DATABASE=springboot -e MYSQL_USER=keesun -e MYSQL_PASSWORD=pass -d mysql
+  * docker exec -i -t mysql_boot bash
+  * mysql -u root -p
+* MySQL용 Datasource 설정
+  * spring.datasource.url=jdbc:mysql://localhost:3306/springboot?useSSL=false
+    * useSSL=true로 설정하고, truststore를 제공하여 SSL로 접근할 수 있게 하는 것이 최선!
+  * spring.datasource.username={username}
+  * spring.datasource.password={password}
+  
+### postgreSQL
+* 의존성 추가
+```
+<dependency>
+   <groupId>org.postgresql</groupId>
+   <artifactId>postgresql</artifactId>
+</dependency>
+```
+* PostgreSQL 설치 및 서버 실행 (docker)
+```
+docker run -p 5432:5432 -e POSTGRES_PASSWORD=pass -e POSTGRES_USER=keesun -e POSTGRES_DB=springboot --name postgres_boot -d postgres
+
+docker exec -i -t postgres_boot bash
+
+su - postgres
+
+psql springboot
+
+데이터베이스 조회
+\list
+
+테이블 조회
+\dt
+
+쿼리
+SELECT * FROM account;
+```
+
+### Spring Data JPA
+* ORM(Object-Relational Mapping)
+  * 객체와 릴레이션을 맵핑할 때 발생하는 개념적 불일치를 해결하는 프레임워크
+* JPA(Java Persistence API)
+  * ORM을 위한 자바 표준
+* 스프링 데이터 JPA
+  * Repository 빈 자동 생성
+  * 쿼리 메소드 자동 구현
+  * @EnableJpaRepositories (스프링 부트가 자동으로 설정)
+* 스프링 데이터 JPA 의존성 추가
+```
+<dependency>
+   <groupId>org.springframework.boot</groupId>
+   <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+* 스프링 데이터 JPA 사용하기
+  * @Entity 클래스 만들기
+  * Repository 만들기
+* 스프링 데이터 리파지토리 테스트 만들기
+  * H2 DB를 테스트 의존성에 추가하기
+  * @DataJpaTest (슬라이스 테스트) 작성
