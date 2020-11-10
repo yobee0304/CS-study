@@ -143,6 +143,7 @@
   * 물리(Bit)
     * 물리매체를 통해 bit 흐름을 전송
     * 물리적 장치와 인터페이스가 전송을 위해 필요한 기능과 처리절차 규정
+    
 (참고 : https://jhnyang.tistory.com/194)
 
 ## 9. 사이트에 접속한다면 무슨일이?!
@@ -156,4 +157,23 @@
 
 (참고 : https://sophia2730.tistory.com/entry/DNS-%EC%A3%BC%EC%86%8C%EC%B0%BD%EC%97%90-wwwnavercom%EC%9D%84-%EC%B9%98%EB%A9%B4-%EC%9D%BC%EC%96%B4%EB%82%98%EB%8A%94-%EC%9D%BC)
 
-## 10. UDP & TCP
+## 10. TCP & UDP
+* TCP(**T**ransfermission **C**ontrol **P**rotocol)
+  * 가상 회선 방식 제공
+    * 발신자와 수신자를 연결하여 패킷을 전송하기 위한 논리적 경로를 배정하는 것을 의미한다.
+  * 3-way handshaking과정을 통해 연결을 설정하고 4-way handshaking을 통해 해제한다.
+    * 3-way handshaking과정을 통해 발신자와 수신자를 확실히 하여 정확한 전송을 보장한다.
+  * 흐름 제어 및 혼잡 제어
+  * 높은 신뢰성 보장
+  * UDP보다 전송속도가 느리다
+  * 데이터의 전송 순서를 보장하며 1:1통신만 가능하다.
+  * 전이증(Full-Duplex), 점대점(Point-to-Point) 방식
+* UDP(**U**ser **D**atagram **P**rotocol)
+  * 비연결형 서비스로, 데이터그램 방식 제공
+  * 정보를 주고 받을 때, 정보를 보내거나 받는다는 신호절차를 거치지 않는다.
+  * UDP헤더의 CheckSum필드를 통해 최소한의 오류만 검출한다.
+  * 신뢰성이 낮다.
+  * TCP보다 전송속도가 빠르다.
+  * 데이터의 전송 순서가 바뀔 수 있으며 1:1, 1:N, N:N통신을 모두 지원한다.
+
+(참고 : https://mangkyu.tistory.com/15)
