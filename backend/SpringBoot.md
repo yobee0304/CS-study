@@ -523,3 +523,71 @@ SELECT * FROM account;
 * 스프링 데이터 리파지토리 테스트 만들기
   * H2 DB를 테스트 의존성에 추가하기
   * @DataJpaTest (슬라이스 테스트) 작성
+
+### 데이터베이스 초기화
+* JPA를 사용한 데이터베이스 초기화
+  * spring.jpa.hibernate.ddl-auto
+    * update : 기존의 데이터를 유지하면서 사용 가능, 객체의 변수명을 변경할 경우 테이블에는 새로운 컬럼이 생성되고 기존의 컬럼은 유지되는 문제가 발생
+    * create : 기존의 테이블을 drop후 새로 생성
+    * validate : 오브젝트에 릴레이션을 맵핑할 수 있는지 검증
+  * spring.jpa.generate-dll=true로 설정 (기본으로는 false로 설정)
+* SQL 스크립트를 사용한 데이터베이스 초기화
+  * schema.sql 또는 schema-${platform}.sql
+  * data.sql 또는 data-${platform}.sql
+  * ${platform} 값은 spring.datasource.platform 으로 설정 가능
+  
+### 데이버베이스 마이그레이션
+* 대표적으로 Flyway와 Liquibase가 있다.
+* 의존성 추가(Flyway)
+  * org.flywaydb:flyway-core
+* 마이그레이션 디렉토리
+  * db/migration 또는 db/migration/{vendor}
+  * spring.flyway.locations로 변경 가능
+* 마이그레이션 파일 이름
+  * V숫자__이름.sql
+  * V는 꼭 대문자로
+  * 숫자는 순차적으로 (타임스탬프 권장)
+  * 숫자와 이름 사이에 언더바 두 개
+  * 이름은 가능한 서술적으로
+  
+### Redis
+* 캐시, 메시지 브로커, 키/밸류 스토어 등으로 사용 가능.
+* 의존성 추가
+  * spring-boot-starter-data-redis
+* Redis 설치 및 실행 (도커)
+```
+docker run -p 6379:6379 --name redis_boot -d redis
+docker exec -i -t redis_boot redis-cli
+```
+* 스프링 데이터 Redis
+  * https://projects.spring.io/spring-data-redis/
+  * StringRedisTemplate 또는 RedisTemplate
+  * extends CrudRepository
+* Redis 주요 커맨드
+  *https://redis.io/commands
+```
+keys *
+get {key}
+hgetall {key}
+hget {key} {column}
+```
+* 커스터마이징
+  * spring.redis.*
+  
+### MongoDB
+* JSON 기반의 도큐먼트 데이터베이스
+* 의존성 추가
+  * spring-boot-starter-data-mongodb
+* MongoDB 설치 및 실행 (도커)
+```
+docker run -p 27017:27017 --name mongo_boot -d mongo
+docker exec -i -t mongo_boot bash
+mongo
+```
+* 스프링 데이터 몽고DB
+  * MongoTemplate
+  * MongoRepository
+  * 내장형 MongoDB (테스트용)
+    * 운영용 MongoDB에 영향을 주지 않으면서 테스트 가능
+    * de.flapdoodle.embed:de.flapdoodle.embed.mongo
+  * @DataMongoTest
