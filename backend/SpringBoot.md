@@ -291,14 +291,14 @@
   - 글로벌 설정
     - ~/.spring-boot-devtools.properties : 1순위 외부설정 파일
 
-## 4. Spring MVC
-### 소개
+### Spring MVC
+#### 소개
 * 스프링 MVC는 AutoConfiguration에 의해서 자동 설정되므로, 별다른 설정 없이 사용 가능하다.
 * 스프링 MVC 기능 확장 : @Configuration + WebMvcConfigurer
 * 스프링 MVC 기능 재정의 : @Configuration + @EnableWebMvc
   * 재정의할 경우, 스프링 부트에서 자동으로 제공하는 설정이 모두 리셋 되어 일일히 추가해줘야 하기 때문에 추천하지 않는다!
 
-### HttpMessageConverters
+#### HttpMessageConverters
 * HTTP 요청 본문을 객체로 변경하거나, 객체를 HTTP 응답 본문으로 변경할 때 사용한다. (@RequestBody, @ResponseBody)
 * Default는 Json타입
 * 클래스에 @RestConroller 어노테이션이 붙어있따면, @ResponseBody 생략 가능
@@ -315,11 +315,11 @@ public User create(@RequestBody User user){
 }
 ```
 
-### ViewResolve
+#### ViewResolve
 * 들어오는 Accept Header에 알맞는 응답을 제공하는 기능.
   * Accept Header : 어떠한 형식의 응답을 원하는지 서버 사이드에 제공하는 정보
   
-### 정적 리소스
+#### 정적 리소스
 * 서버 사이드로 요청이 들어왔을 때, 새로운 뷰를 생성하지 않고 해당하는 리소스가 이미 만들어져 있는 리소스.
 * 기본 리소스 위치
   * classpath:/static
@@ -343,12 +343,12 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
 }
 ```
 
-### 웹JAR
+#### 웹JAR
 * 스크립트 라이브러리(JQuery, Bootstrap)를 웹JAR파일을 통해 추가 가능
 * 웹JAR 맵핑 : "/webjars/**"
 * webjars-locator-core 의존성 : 웹JAR 버전 생략 가능
 
-### index 페이지 & 파비콘
+#### index 페이지 & 파비콘
 * 웰컴페이지
   * 루트로 접근했을 때 확인할 수 있는 페이지
   * index.html -> index.템플릿 순으로 확인하고, 존재하면 웰컴페이지로 사용
@@ -357,7 +357,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   * favicon.ico
   * 페이지 탭에 표시되는 작은 아이콘
 
-### 템플릿 엔진
+#### 템플릿 엔진
 * 스프링 부트가 자동 설정을 지원하는 템플릿 엔진
   * Thymeleaf
   * FreeMarker
@@ -370,7 +370,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   * 템플릿 엔진이 있더라도, 서블릿 엔진에 의해서 최종적인 템플릿이 완성된다.
   * Thymeleaf는 서블릿 엔진에 독립적으로 동작하는 템플릿 엔진이다.
   
-### HtmlUnit
+#### HtmlUnit
 * HtmlUnit : HTML의 단위테스트를 위한 툴
 * WebClient를 주입받아 단위테스트에 사용한다.
 ```xml
@@ -386,7 +386,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
         </dependency>
 ```
 
-### ExceptionHandler
+#### ExceptionHandler
 * 스프링 MVC 예외 처리 방법
   * @ControllerAdvice
   * @ExchangepHandler
@@ -398,7 +398,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   * 5xx.html : 상태 코드가 500대일때의 에러 페이지
   * ErrorViewResolver 구현
   
-### Spring HATEOAS
+#### Spring HATEOAS
 * **H**ypermedia **A**s **T**he **E**ngine **O**f **A**pplication **S**tate
 * 서버: 현재 리소스와 연관된 링크 정보를 클라이언트에게 제공한다.
 * 클라이언트: 연관된 링크 정보를 바탕으로 리소스에 접근한다.
@@ -412,7 +412,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
     * spring.jackson.*
     * Jackson2ObjectMapperBuilder
 
-### CORS
+#### CORS
 * SOP(Single-Origin Policy)
   * 같은 오리진에만 요청을 보낼 수 있다는 규칙
   * 기본적으로 적용되어 있는 규칙
@@ -429,8 +429,8 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   8 WebMvcConfigurer 사용해서 글로벌 설정
 
 
-## 5. Spring Data
-### 인메모리 데이터베이스
+### Spring Data
+#### 인메모리 데이터베이스
 * 지원하는 인메모리 데이터베이스  
   * H2 (추천)
   * HSQL
@@ -447,7 +447,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   * spring.h2.console.enabled=true 추가.
   * /h2-console로 접속 (이 path도 바꿀 수 있음)
   
-### MySQL
+#### MySQL
 * 지원하는 DBCP
   * HikariCP (기본)
   * Tomcat CP
@@ -473,7 +473,7 @@ public void addResourceHandlers(ResourceHandlerRegistry registry){
   * spring.datasource.username={username}
   * spring.datasource.password={password}
   
-### postgreSQL
+#### postgreSQL
 * 의존성 추가
 ```
 <dependency>
@@ -501,7 +501,7 @@ psql springboot
 SELECT * FROM account;
 ```
 
-### Spring Data JPA
+#### Spring Data JPA
 * ORM(Object-Relational Mapping)
   * 객체와 릴레이션을 맵핑할 때 발생하는 개념적 불일치를 해결하는 프레임워크
 * JPA(Java Persistence API)
@@ -524,7 +524,7 @@ SELECT * FROM account;
   * H2 DB를 테스트 의존성에 추가하기
   * @DataJpaTest (슬라이스 테스트) 작성
 
-### 데이터베이스 초기화
+#### 데이터베이스 초기화
 * JPA를 사용한 데이터베이스 초기화
   * spring.jpa.hibernate.ddl-auto
     * update : 기존의 데이터를 유지하면서 사용 가능, 객체의 변수명을 변경할 경우 테이블에는 새로운 컬럼이 생성되고 기존의 컬럼은 유지되는 문제가 발생
@@ -536,7 +536,7 @@ SELECT * FROM account;
   * data.sql 또는 data-${platform}.sql
   * ${platform} 값은 spring.datasource.platform 으로 설정 가능
   
-### 데이버베이스 마이그레이션
+#### 데이버베이스 마이그레이션
 * 대표적으로 Flyway와 Liquibase가 있다.
 * 의존성 추가(Flyway)
   * org.flywaydb:flyway-core
@@ -550,7 +550,7 @@ SELECT * FROM account;
   * 숫자와 이름 사이에 언더바 두 개
   * 이름은 가능한 서술적으로
   
-### Redis
+#### Redis
 * 캐시, 메시지 브로커, 키/밸류 스토어 등으로 사용 가능.
 * 의존성 추가
   * spring-boot-starter-data-redis
@@ -574,7 +574,7 @@ hget {key} {column}
 * 커스터마이징
   * spring.redis.*
   
-### MongoDB
+#### MongoDB
 * JSON 기반의 도큐먼트 데이터베이스
 * 의존성 추가
   * spring-boot-starter-data-mongodb
@@ -591,3 +591,81 @@ mongo
     * 운영용 MongoDB에 영향을 주지 않으면서 테스트 가능
     * de.flapdoodle.embed:de.flapdoodle.embed.mongo
   * @DataMongoTest
+
+### Spring Security
+#### Starter-Security
+* 스프링 시큐리티
+  * 웹 시큐리티
+  * 메소드 시큐리티
+  * 다양한 인증 방법 지원 : LDAP, 폼 인증, Basic 인증, OAuth, ...
+* 스프링 부트 시큐리티 자동 설정
+  * SecurityAutoConfiguration
+  * UserDetailsServiceAutoConfiguration
+    * 인메모리로 랜덤하게 유저 객체를 생성
+  * spring-boot-starter-security
+    * 스프링 시큐리티 5.* 의존성 추가
+  * 모든 요청에 대해서 요청이 필요하게 된다.
+  * 기본 사용자 생성
+    * Username: user
+    * Password: 애플리케이션을 실행할 때 마다 랜덤 값 생성 (콘솔에 출력)
+    * spring.security.user.name
+    * spring.security.user.password
+  * 인증 관련 각종 이벤트 발생
+    * DefaultAuthenticationEventPublisher 빈 등록
+    * 다양한 인증 에러 핸들러 등록 가능
+* 웹 시큐리티 설정 커스터마이징
+```java
+@Configuration
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+   @Override
+   protected void configure(HttpSecurity http) throws Exception {
+       http.authorizeRequests()
+               .antMatchers("/", "/hello").permitAll()
+               .anyRequest().authenticated()
+               .and()
+           .formLogin()
+               .and()
+           .httpBasic();
+   }
+}
+```
+
+#### REST-Client
+* RestTemplate
+  * Blocking I/O 기반의 Synchronous API
+  * RestTemplateAutoConfiguration
+  * 프로젝트에 spring-web 모듈이 있다면 RestTemplateBuilder를 빈으로 등록해 준다.
+ 
+* WebClient
+  * Non-Blocking I/O 기반의 Asynchronous API
+  * WebClientAutoConfiguration
+  * 프로젝트에 spring-webflux 모듈이 있다면 WebClient.Builder를 빈으로 등록해 준다.
+  
+* 커스터마이징
+
+RestTemplate
+* 기본으로 java.net.HttpURLConnection 사용.
+* 커스터마이징
+  * 로컬 커스터마이징
+  * 글로벌 커스터마이징
+    * RestTemplateCustomizer
+    * 빈 재정의
+ 
+WebClient
+* 기본으로 Reactor Netty의 HTTP 클라이언트 사용.
+* 커스터마이징
+  * 로컬 커스터마이징
+  * 글로벌 커스터마이징
+    * WebClientCustomizer
+    * 빈 재정의
+    
+#### 그밖의 기술 연동
+* 캐시
+* 메시징
+* Validation
+* 이메일 전송
+* JTA
+* 스프링 인티그레이션
+* 스프링 세션
+* JMX
+* 웹소켓
