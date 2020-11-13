@@ -91,3 +91,33 @@ CREATE TABLE 테이블명 (
     ...
     ) ENGINE MyISAM;
 ```
+
+## 5. 파티셔닝
+* 개념
+  * 큰 table이나 index를 관리하기 쉽도록 보다 작은 단위인 partition으로 분할하는 것을 말한다.
+  * DB에 접근하는 애플리케이션 입장에서는 물리적 데이터 분할을 인식하지 못한다. (여전히 하나의 table로 인식)
+* 배경
+  * 하나의 DBMS에 크기가 큰 table이 존재하는 경우, 용량과 성능 측면에서 많은 이슈가 발생한다.
+  * '파티셔닝'기법을 통해, 소프트웨어적으로 데이터베이스를 분산 처리하여 성능이 저하되는 것을 방지하고 관리를 보다 수월하게 한다.
+* 장단점
+  * 장점
+    * Full Scan에서 Access 범위를 줄여 성능 향상 효과를 기대할 수 있다.
+    * 전체 데이터의 훼손 가능성이 줄어들어 데이터 가용성이 향상된다.
+    * partition별로 독립적으로 백업 및 복구가 가능하다.
+  * 단점
+    * table간 JOIN에 대한 비용이 증가한다.
+    * table과 index는 무조건 같이 파티셔닝 해야 한다.
+* 종류
+  * 수평(horizontal) 파티셔닝
+![horizontal_partitioning](https://gmlwjd9405.github.io/images/database/horizontal-partitioning.png)
+    * 스키마가 같은 데이터를 두 개 이상의 테이블에 나누어 저장하는 것을 말한다.
+    * 샤딩(Sharding)과 동일한 개념
+    * 하나의 테이블에 저장되어 있는 데이터의 개수가 작아지고 index의 개수 또한 작아지므로, 성능이 향상된다.
+    * 데이터를 찾기 위해서 여러 개의 테이블을 확인해야 하므로 latency가 증가한다.
+  * 수직(vertical) 파티셔닝
+![vertical_partitioning](https://gmlwjd9405.github.io/images/database/vertical-partitioning.png)
+    * 모든 컬럼중 특정 컬럼들을 쪼개서 따로 저장하는 방식이다.
+    * 이미 정규화 되어있는 테이블을 다시 분리하는 과정
+    * 테이블에서 자주 사용되는 특정 컬럼을 분리하여 성능을 향상시킬 수 있다.
+  
+( 참고 : https://gmlwjd9405.github.io/2018/09/24/db-partitioning.html )
