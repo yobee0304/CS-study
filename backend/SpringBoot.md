@@ -669,3 +669,53 @@ WebClient
 * 스프링 세션
 * JMX
 * 웹소켓
+
+## 4. 응용
+### Spring Boot Actuator
+* 의존성 추가
+  * spring-boot-starter-actuator
+* 애플리케이션의 각종 정보를 확인할 수 있는 Endpoints
+* 다양한 Endpoints 제공
+* JMX 또는 HTTP를 통해 접근 가능 하다.
+* 'shutdown'을 제외한 모든 Endpoint는 기본적으로 활성화 상태
+* 활성화 옵션 조정
+  * management.endpoints.enabled-by-default=false
+  * management.endpoint.info.enabled=true
+  
+#### JMX & HTTP
+* JConsole 사용하기
+  * https://docs.oracle.com/javase/tutorial/jmx/mbeans/
+  * https://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html
+* VisualVM 사용하기
+  * https://visualvm.github.io/download.html
+* HTTP 사용하기
+  * /actuator
+  * health와 info를 제외한 대부분의 Endpoint가 기본적으로 비공개 상태
+* 공개 옵션 조정
+  * management.endpoints.web.exposure.include=*
+  * management.endpoints.web.exposure.exclude=env,beans
+  * 외부에 공개되면 보안상의 문제가 발생할 수 있기 때문에, Security로 admin만 접근 할 수 있도록 설정해야 한다.
+  
+#### 스프링 부트 어드민
+* 클라이언트의 정보를 보다 편하게 볼 수 있다.
+* 스프링 부트 Actuator UI 제공 어드민 서버 설정
+```
+<dependency>
+  <groupId>de.codecentric</groupId>
+  <artifactId>spring-boot-admin-starter-server</artifactId>
+  <version>2.0.1</version>
+</dependency>
+
+@EnableAdminServer
+```
+* 클라이언트 설정
+```
+<dependency>
+  <groupId>de.codecentric</groupId>
+  <artifactId>spring-boot-admin-starter-client</artifactId>
+  <version>2.0.1</version>
+</dependency>
+
+spring.boot.admin.client.url=http://localhost:8080
+management.endpoints.web.exposure.include=*
+```
