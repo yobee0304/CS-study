@@ -31,3 +31,30 @@
 0 | 1 | 2
 1 | 0 | 3
 1 | 1 | 4
+
+## 2. Process & Thread
+1. Mutex & Semaphore
+* Critical Section을 보장하기 위해 사용된다.
+  * Critical Section(임계구역) : 각 프로세스에서 공유 데이터를 액세스하는 프로그램 코드 부분
+  
+* Mutex
+  * Mutual Exclusion
+  * Critical Section을 가진 쓰레드들의 Running Time이 겹치지 않도록 실행시켜주는 기술.
+  * 멀티 쓰레드 환경에서 사용
+  
+* Semaphore
+  * 프로세스가 리소스에 접근할 수 있는 상태를 나타내는 카운터
+  * 세마포어의 값에 따라 프로세스는 즉시 자원을 사용할 수 있거나, 일정 시간을 기다려야 한다.
+  * 멀티 프로세스 환경에서 사용
+
+* Mutex와 Semaphore의 차이점
+  * **Mutex는 동기화 대상이 오직 하나지만, Semaphore는 동기화 대상이 하나 이상일 때 사용한다.**
+    * Mutex는 상태가 0, 1뿐인 binary semaphore
+    * semaphore는 mutex가 될 수 있지만, mutex는 semaphore가 없다!
+  * Semaphore는 소유할 수 없는 반면, Mutex는 소유가 가능하며 이에 대한 소유주가 존재합니다.
+    * mutex는 상태가 두 개뿐인 lock이므로, lock을 소유할 수 있습니다.
+  * Mutex의 경우 Mutex를 보유하고 있는 쓰레드가 Mutex를 해제할 수 없지만, Semahore의 경우 이러한 Semaphore의 경우 이러한 Semaphore를 보유하지 않는 쓰레드가 이 Semaphore를 해제할 수 있습니다.
+
+( 참고 : https://jwprogramming.tistory.com/13 )
+
+2. Lock
