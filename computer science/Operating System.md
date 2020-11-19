@@ -58,3 +58,20 @@
 ( 참고 : https://jwprogramming.tistory.com/13 )
 
 2. Lock
+* Lock이란?
+  * 데이터의 무결성과 일관성을 보장하기 위한 방법
+
+* Lock의 종류
+  * Shared Lock(공유 Lock)
+    * 데이터를 읽을 때 사용
+    * 원하는 데이터에 Lock을 걸었다 하더라도 다른 세션에서 읽을 수 있다.
+    * 공유 Lock을 설정한 경우 추가적인 공유 Lock을 설정할 수 있지만, 배타적 Lock을 추가할 수 없다.
+  * Exclusive Lock(배타적 Lock)
+    * 데이터를 변결할 때 사용
+    * 해당 Lock이 해제되기 전까지는 공유, 배타적 Lock을 설정할 수 없다.
+    
+* Dead Lock
+  * 트랜젝션간의 교착상태
+  * 두개의 트랜젝션이 서로가 가지고 있는 리소스의 Lock을 획득하기 위해 무한정 대기하는 상태를 말한다.
+  
+(참고 : https://chrisjune-13837.medium.com/db-lock-%EB%9D%BD%EC%9D%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-d908296d0279)
