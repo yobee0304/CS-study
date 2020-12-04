@@ -102,7 +102,7 @@ public class Main {
 1) S(단일 책임 원칙 SRP, Single Responsibility Principle)
 - 객체는 단 하나의 책임을 가져야 한다 
 - 변경 사유가 될만한 것도 하나가 되기 때문에, 응집도를 높일 수 있다
-2) O(개반-폐쇄 원칙 OCP, Open Closed Priciple)
+2) O(개방-폐쇄 원칙 OCP, Open Closed Priciple)
 - 기존의 코드를 변경하지 않으면서 기능을 추가할 수 있도록 설계되어야 한다
 - 변해야 하는 것은 쉽게 변하게 해야 하고, 변하지 말아야 하는 것은 영향을 받지 않게 해야 한다.
 3) L(리스코프 치환 원칙 LSP, Liskov Substitution Principle)
