@@ -295,3 +295,22 @@ Charlie.introduce();
 		* 유닛 테스트를 통해 B클래스와 의존성 관계를 가지고 있는 다른 클래스들도 함께 확인하여, 위의 경우를 방지할 수 있다.
 
 (참고 : https://imasoftwareengineer.tistory.com/88)
+
+### 11. String vs StringBuffer vs StringBuilder
+* String
+	* 불변(immutable)의 속성
+	* '+'연산을 통하면, 기존의 메모리에 새로운 문자열이 더해지는 모습으로 착각하지만, 아예 새로운 문자열이 하나 더 생성되고 기존의 문자열은 GC(Garbage Collector)에 의해 삭제된다.
+	* 문자열 연산이 빈번히 발생하는 경우, 임시 문자열의 생성때문에 힙 메모리가 부족해 질 수 있다는 단점이 있다.
+* StringBuffer, StringBuilder
+	* 가변(mutable)성 도입
+	* 동일 객체 내에서 String 문자열 변경 가능
+* StringBuffer vs StringBuilder
+	* 동기화의 유무 차이
+	* StringBuffer는 동기화를 지원하기 때문에, 멀티 쓰레드 환경에서 안전하다. (String도 동기화 지원)
+	* StringBuilder는 동기화를 지원하지 않기 때문에, 멀티 쓰레드 환경에서의 사용은 적합하지 않다.
+* 요약
+	* String : 문자열 연산이 적고, 멀티 쓰레드 환경인 경우
+	* StringBuffer : 문자열 연산이 많고, 멀티 쓰레드 환경인 경우
+	* StringBuilder : 문자열 연산이 많고, 단일 쓰레드거나 동기화를 고려하지 않아도 되는 경우
+
+(참고 : https://ifuwanna.tistory.com/221)
